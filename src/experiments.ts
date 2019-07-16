@@ -1,5 +1,5 @@
 export function experiment() {
-  typescriptCheckTest();
+  nodeGlobalObjects();
 }
 
 function typescriptCheckTest() {
@@ -9,6 +9,29 @@ function typescriptCheckTest() {
 
   // Change one number to a string
   console.log(add(1, 2));
+}
+
+function nodeGlobalObjects() {
+  const globals = {
+    Buffer,
+    console,
+    global,
+    process,
+    setImmediate,
+    setInterval,
+    setTimeout,
+  };
+  console.log({ globals, });
+
+  const moduleGlobals = {
+    __dirname,
+    __filename,
+    exports,
+    module,
+    require,
+  };
+
+  console.log({ moduleGlobals, });
 }
 
 function helloWorld() {
