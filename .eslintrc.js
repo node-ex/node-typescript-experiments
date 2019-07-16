@@ -11,6 +11,7 @@ module.exports = {
     project: './tsconfig.json'
   },
   plugins: [
+    'standard',
     "@typescript-eslint",
     'compat',
     'import',
@@ -18,19 +19,19 @@ module.exports = {
     'node',
     'promise',
     'security',
-    'standard',
     'unicorn',
   ],
   extends: [
+    'standard',
     'eslint:recommended',
     'plugin:compat/recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
+    'plugin:import/typescript',
     'plugin:node/recommended',
     'plugin:promise/recommended',
     'plugin:security/recommended',
-    'plugin:unicorn/recommended',
-    'standard'
+    'plugin:unicorn/recommended'
   ],
   rules: {
     'comma-dangle': ['error', 'always'],
