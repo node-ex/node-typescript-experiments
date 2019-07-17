@@ -43,10 +43,32 @@ function rawHttpServer() {
 
   const server = http.createServer(
     (request: http.IncomingMessage, response: http.ServerResponse) => {
-      response.statusCode = 200;
-      response.setHeader('Content-Type', 'text/plain');
-      response.write('Hello, World!\n');
-      response.end();
+      const requestParameters = {
+        url: request.url,
+        method: request.method,
+        headers: request.headers,
+      };
+
+      console.log({ requestParameters, });
+
+      if (request.url === '/') {
+        response.statusCode = 200;
+        response.setHeader('Content-Type', 'text/plain');
+        response.write('Hello, World!\n');
+        return response.end();
+      } else if (request.url === '/' && request.method === 'POST') {
+        response.statusCode = 200;
+        response.setHeader('Content-Type', 'text/plain');
+        response.write('Your POST body: ...\n');
+        return response.end();
+      } else {
+        response.statusCode = 200;
+        response.setHeader('Content-Type', 'text/plain');
+        response.write(`Your path is ${request.url}\n`);
+        return response.end();
+      }
+
+      // process.exit(0);
     });
 
   server.listen(
