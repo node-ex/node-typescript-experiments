@@ -1,5 +1,7 @@
+import http from 'http';
+
 export function experiment() {
-  nodeGlobalObjects();
+  rawHttpServer();
 }
 
 function typescriptCheckTest() {
@@ -20,6 +22,7 @@ function nodeGlobalObjects() {
     setImmediate,
     setInterval,
     setTimeout,
+    url: new URL('/foo', 'https://example.org/'),
   };
   console.log({ globals, });
 
@@ -32,6 +35,27 @@ function nodeGlobalObjects() {
   };
 
   console.log({ moduleGlobals, });
+}
+
+function rawHttpServer() {
+  const hostname = '127.0.0.1';
+  const port = 3000;
+
+  const server = http.createServer(
+    (request: http.IncomingMessage, response: http.ServerResponse) => {
+      response.statusCode = 200;
+      response.setHeader('Content-Type', 'text/plain');
+      response.write('Hello, World!\n');
+      response.end();
+    });
+
+  server.listen(
+    port,
+    hostname,
+    () => {
+      console.log(`Server running at http://${hostname}:${port}/`);
+    }
+  );
 }
 
 function helloWorld() {
