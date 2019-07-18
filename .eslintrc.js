@@ -38,6 +38,13 @@ module.exports = {
     'indent': ['error', 2],
     'linebreak-style': ['error', 'unix'],
     'object-curly-spacing': ['error', 'always'],
+    'lines-between-class-members': [
+      'error',
+      'always',
+      {
+        exceptAfterSingleLine: true
+      }
+    ],
     'max-len': ['warn', {
       code: 80,
       ignoreComments: false,
@@ -57,7 +64,13 @@ module.exports = {
     'semi': ['error', 'always'],
     'space-before-function-paren': ['error', 'never'],
     '@typescript-eslint/no-explicit-any': 'warn',
-    '@typescript-eslint/no-unused-vars': 'warn',
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      {
+        'varsIgnorePattern': '^_',
+        'argsIgnorePattern': '^_'
+      }
+    ],
     'compat/compat': 'off', // Takes too long to lint
     'import/no-named-as-default-member': 'off',
     'import/no-unresolved': 'off',

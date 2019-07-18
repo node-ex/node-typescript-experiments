@@ -1,12 +1,13 @@
 import http from 'http';
 
-import { inspectObject, } from './utils';
+import { inspectObject as _io, } from './utils';
 
 export function experiment() {
-  rawHttpServer();
+  _rawHttpServer();
 }
 
-function typescriptCheckTest() {
+// @ts-ignore
+function _typescriptCheckTest() {
   const add = (a: number, b: number) => {
     return a + b;
   };
@@ -15,7 +16,8 @@ function typescriptCheckTest() {
   console.log(add(1, 2));
 }
 
-function nodeGlobalObjects() {
+// @ts-ignore
+function _nodeGlobalObjects() {
   const globals = {
     Buffer,
     console,
@@ -39,7 +41,8 @@ function nodeGlobalObjects() {
   console.log({ moduleGlobals, });
 }
 
-function rawHttpServer() {
+// @ts-ignore
+function _rawHttpServer() {
   const hostname = '127.0.0.1';
   const port = 3000;
 
@@ -52,6 +55,7 @@ function rawHttpServer() {
       };
       console.log({ requestParameters, });
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const requestBodyChunks: any[] = [];
       let requestBody: string = '';
       request.on('data', (chunk) => {
@@ -62,7 +66,7 @@ function rawHttpServer() {
       });
       console.log({ requestBody, });
 
-      // const inspectionSet = inspectObject(request);
+      // const inspectionSet = _io(request);
       // debugger;
 
       if (request.url === '/') {
@@ -94,7 +98,8 @@ function rawHttpServer() {
   );
 }
 
-function helloWorld() {
+// @ts-ignore
+function _helloWorld() {
   console.log('Hello, World!');
 }
 
