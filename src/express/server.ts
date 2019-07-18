@@ -1,25 +1,25 @@
-import http from 'http';
-
 import express from 'express';
+import bodyParser from 'body-parser';
 
 import config from '@/config';
+import routes from '@/express/routes';
 
 const expressApp = express();
+
+expressApp.use(bodyParser.urlencoded({ extended: true, }));
 
 expressApp.use((_request, _response, next) => {
   console.log('This is my custom Application-level middleware');
   next();
 });
 
-expressApp.use((_request, response, _next) => {
-  response.send('<h1>Hello, Express!</h1>');
-});
+expressApp.use('/', routes.rootRouter);
 
-const httpServer = http.createServer(expressApp);
+expressApp.use(routes.error404Router);
 
 export function runServer() {
   const { serverPort, serverHostname, } = config;
-  httpServer.listen(
+  expressApp.listen(
     serverPort,
     serverHostname,
     () => {
