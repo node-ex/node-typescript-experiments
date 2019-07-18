@@ -1,5 +1,7 @@
 import http from 'http';
 
+import { inspectObject, } from './utils';
+
 export function experiment() {
   rawHttpServer();
 }
@@ -48,8 +50,20 @@ function rawHttpServer() {
         method: request.method,
         headers: request.headers,
       };
-
       console.log({ requestParameters, });
+
+      const requestBodyChunks: any[] = [];
+      let requestBody: string = '';
+      request.on('data', (chunk) => {
+        requestBodyChunks.push(chunk);
+      });
+      request.on('end', () => {
+        requestBody = Buffer.concat(requestBodyChunks).toString();
+      });
+      console.log({ requestBody, });
+
+      // const inspectionSet = inspectObject(request);
+      // debugger;
 
       if (request.url === '/') {
         response.statusCode = 200;
