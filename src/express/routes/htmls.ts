@@ -2,7 +2,6 @@ import path from 'path';
 
 import express from 'express';
 import { Express, } from 'express-serve-static-core';
-import cons from 'consolidate';
 import nunjucks from 'nunjucks';
 
 const router = express.Router();
